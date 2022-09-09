@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Components</title>
+    <style>
+      html {
+        font-size: 90%;
+      }
+
+      body {
+        color: #2b2b2b;
+        font-family: sans-serif;
+        margin: 0 auto;
+        max-width: 350px;
+        padding-top: 5rem;
+      }
+      ul {
+        list-style-type: none;
+      }
+
+      li::before {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.25rem;
+        content: "";
+      }
+
+      .open::before,
+      .closed::before {
+        background-size: 1rem 1rem;
+        position: relative;
+        top: 0.25rem;
+        opacity: 0.3;
+      }
+
+      .open::before {
+        background-image: url(img/down.png);
+      }
+
+      .closed::before {
+        background-image: url(img/right.png);
+      }
+
+      .closed .closed::before,
+      .closed .open::before {
+        display: none;
+      }
+
+      hr {
+        margin: 50px 0 50px;
+        width: auto;
+        height: 5px;
+        background: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>The video element</h1>
+
+    <video width="450" height="250" controls preload="auto">
+      <source
+        src="https://media.geeksforgeeks.org/wp-content/uploads/20190616234019/Canvas.move_.mp4"
+        type="video/mp4"
+      />
+      <source
+        src="https://media.geeksforgeeks.org/wp-content/uploads/20190616234019/Canvas.move_.ogg"
+        type="video/ogg"
+      />
+    </video>
+
+    <h2>Counter</h2>
+
+    <my-counter id="counter" count="10"></my-counter>
+    <hr />
+
+    <h2>User Card</h2>
+
+    <user-card
+      name="John Doe"
+      avatar="https://randomuser.me/api/portraits/men/1.jpg"
+    >
+      <div slot="email">johndoe@gmail.com</div>
+      <div slot="phone">555-555-5555</div>
+    </user-card>
+    <user-card
+      name="Jane Doe"
+      avatar="https://randomuser.me/api/portraits/women/2.jpg"
+    >
+      <div slot="email">janedoe@gmail.com</div>
+      <div slot="phone">333-333-3333</div>
+    </user-card>
+
+    <hr />
+    <h2>Word Count</h2>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar sed
+      justo sed viverra. Aliquam ac scelerisque tellus. Vivamus porttitor nunc
+      vel nibh rutrum hendrerit. Donec viverra vestibulum pretium. Mauris at
+      eros vitae ante pellentesque bibendum. Etiam et blandit purus, nec aliquam
+      libero. Etiam leo felis, pulvinar et diam id, sagittis pulvinar diam. Nunc
+      pellentesque rutrum sapien, sed faucibus urna sodales in. Sed tortor nisl,
+      egestas nec egestas luctus, faucibus vitae purus. Ut elit nunc, pretium
+      eget fermentum id, accumsan et velit. Sed mattis velit diam, a elementum
+      nunc facilisis sit amet.
+    </p>
+
+    <p>
+      Pellentesque ornare tellus sit amet massa tincidunt congue. Morbi cursus,
+      tellus vitae pulvinar dictum, dui turpis faucibus ipsum, nec hendrerit
+      augue nisi et enim. Curabitur felis metus, euismod et augue et, luctus
+      dignissim metus. Mauris placerat tellus id efficitur ornare. Cras enim
+      urna, vestibulum vel molestie vitae, mollis vitae eros. Sed lacinia
+      scelerisque diam, a varius urna iaculis ut. Nam lacinia, velit consequat
+      venenatis pellentesque, leo tortor porttitor est, sit amet accumsan ex
+      lectus eget ipsum. Quisque luctus, ex ac fringilla tincidunt, risus mauris
+      sagittis mauris, at iaculis mauris purus eget neque. Donec viverra in ex
+      sed ullamcorper. In ac nisi vel enim accumsan feugiat et sed augue. Donec
+      nisl metus, sollicitudin eu tempus a, scelerisque sed diam.
+    </p>
+
+    <p is="word-count"></p>
+
+    <hr />
+
+    <h1>Pop-up info widget - web components</h1>
+
+    <form>
+      <div>
+        <label for="cvc"
+          >Enter your CVC
+          <popup-info
+            img="img/alt.png"
+            data-text="Your card validation code (CVC) is an extra security feature — it is the last 3 or 4 numbers on the back of your card."
+          ></popup-info
+        ></label>
+        <input type="text" id="cvc" />
+      </div>
+    </form>
+    <div>
+      <button class="add">Add custom-square to DOM</button>
+      <button class="update">Update attributes</button>
+      <button class="remove">Remove custom-square from DOM</button>
+    </div>
+    <hr />
+
+    <h1>Expanding list web component</h1>
+    <ul is="expanding-list">
+      <li>
+        UK
+        <ul>
+          <li>
+            Yorkshire
+            <ul>
+              <li>
+                Leeds
+                <ul>
+                  <li>Train station</li>
+                  <li>Town hall</li>
+                  <li>Headrow</li>
+                </ul>
+              </li>
+              <li>Bradford</li>
+              <li>Hull</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        USA
+        <ul>
+          <li>
+            California
+            <ul>
+              <li>Los Angeles</li>
+              <li>San Francisco</li>
+              <li>Berkeley</li>
+            </ul>
+          </li>
+          <li>Nevada</li>
+          <li>Oregon</li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul>
+      <li>Not</li>
+      <li>an</li>
+      <li>expanding</li>
+      <li>list</li>
+    </ul>
+
+    <hr />
+    <h2>Edit Word</h2>
+    <h1><code>edit-word</code> demo</h1>
+
+    <template id="person-template">
+      <div>
+        <h2>Personal ID Card</h2>
+        <slot name="person-name">NAME MISSING</slot>
+        <ul>
+          <li><slot name="person-age">AGE MISSING</slot></li>
+          <li><slot name="person-occupation">OCCUPATION MISSING</slot></li>
+        </ul>
+      </div>
+    </template>
+
+    <person-details>
+      <p slot="person-name"><edit-word>Morgan</edit-word> Stanley</p>
+      <span slot="person-age">36</span>
+      <span slot="person-occupation">Accountant</span>
+    </person-details>
+
+    <p>My name is <edit-word>Chris</edit-word>, the man said.</p>
+    <hr />
+    <h2>Element Details</h2>
+
+    <template id="element-details-template">
+      <style>
+        details {
+          font-family: "Open Sans Light", Helvetica, Arial;
+        }
+        .name {
+          font-weight: bold;
+          color: #217ac0;
+          font-size: 120%;
+        }
+        h4 {
+          margin: 10px 0 -8px 0;
+        }
+        h4 span {
+          background: #217ac0;
+          padding: 2px 6px 2px 6px;
+        }
+        h4 span {
+          border: 1px solid #cee9f9;
+          border-radius: 4px;
+        }
+        h4 span {
+          color: white;
+        }
+        .attributes {
+          margin-left: 22px;
+          font-size: 90%;
+        }
+        .attributes p {
+          margin-left: 16px;
+          font-style: italic;
+        }
+      </style>
+      <details>
+        <summary>
+          <span>
+            <code class="name"
+              >&lt;<slot name="element-name">NEED NAME</slot>&gt;</code
+            >
+            <i class="desc"><slot name="description">NEED DESCRIPTION</slot></i>
+          </span>
+        </summary>
+        <div class="attributes">
+          <h4><span>Attributes</span></h4>
+          <slot name="attributes"><p>None</p></slot>
+        </div>
+      </details>
+      <hr />
+    </template>
+    <element-details>
+      <span slot="element-name">slot</span>
+      <span slot="description"
+        >A placeholder inside a web component that users can fill with their own
+        markup, with the effect of composing different DOM trees together.</span
+      >
+      <dl slot="attributes">
+        <dt>name</dt>
+        <dd>The name of the slot.</dd>
+      </dl>
+    </element-details>
+
+    <element-details>
+      <span slot="element-name">template</span>
+      <span slot="description"
+        >A mechanism for holding client- side content that is not to be rendered
+        when a page is loaded but may subsequently be instantiated during
+        runtime using JavaScript.</span
+      >
+    </element-details>
+    <hr />
+
+    <h2>Editable List</h2>
+    <editable-list
+      title="TODO"
+      list-item-0="First item on the list"
+      list-item-1="Second item on the list"
+      list-item-2="Third item on the list"
+      list-item-3="Fourth item on the list"
+      list-item-4="Fifth item on the list"
+      listItem="This will not appear"
+      add-item-text="Add new list item:"
+    >
+    </editable-list>
+    <hr />
+    <script src="counter.js"></script>
+    <script src="app.js"></script>
+    <script src="word-count.js"></script>
+    <script src="popup-info-box.js"></script>
+    <script src="life-cycle-callback.js"></script>
+    <script src="expnding-list.js"></script>
+    <script src="edit-word.js"></script>
+    <script src="element-details.js"></script>
+    <script src="editable-list.js"></script>
+  </body>
+</html>
